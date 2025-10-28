@@ -1,0 +1,11 @@
+.DS_Store
+.vscode/
+.venv/
+__pycache__/
+*.pyc
+.streamlit/secrets.toml
+uploaded.*
+report_*.csv
+summary_*.pdf
+.env
+*.env
