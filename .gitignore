@@ -7,5 +7,3 @@ __pycache__/
 uploaded.*
 report_*.csv
 summary_*.pdf
-.env
-*.env
