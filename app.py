@@ -2,30 +2,30 @@
 import streamlit as st
 import pandas as pd
 
-# 1) config FIRST
+# ---------- 1) CONFIG ----------
 st.set_page_config(
     page_title="Carbon Emissions Tracker",
     page_icon="🌱",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded",
 )
 
-# 2) sidebar branding
+# ---------- 2) BRANDING ----------
 st.logo(
     "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Leaf_icon_02.svg/512px-Leaf_icon_02.svg.png",
     icon_image="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Leaf_icon_02.svg/64px-Leaf_icon_02.svg.png",
 )
-st.sidebar.markdown("### Analyst")
-st.sidebar.page_link("app.py", label="🏠 Home")
-st.sidebar.page_link("pages/01_Upload_Data.py", label="📤 Upload Data")
-st.sidebar.page_link("pages/02_Recommendations.py", label="💡 Recommendations")
-st.sidebar.page_link("pages/03_Dashboard.py", label="📊 Dashboard")
-st.sidebar.page_link("pages/04_Emission_Factors.py", label="🧮 Emission Factors")
-st.sidebar.page_link("pages/05_Reports.py", label="📑 Reports")
 
-# 3) hero
+# ---------- 3) HERO ----------
 st.markdown(
     """
-    <div style="padding:28px 28px 20px;border-radius:18px;background:linear-gradient(90deg,#f0fdf4, #ecfeff);border:1px solid #e2e8f0;">
+    <div style="
+        padding:28px 28px 20px;
+        border-radius:18px;
+        background:linear-gradient(90deg,#f0fdf4,#ecfeff);
+        border:1px solid #e2e8f0;
+        color:#0f172a;
+    ">
       <h1 style="margin:0;font-size:42px;">🌱 Analyst – Carbon Emissions Tracker</h1>
       <p style="margin:6px 0 0;font-size:18px;opacity:.9">
         Track <b>energy</b>, <b>transport</b>, and <b>waste</b>. Get dashboards and actionable reduction ideas.
@@ -35,37 +35,42 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# optional banner image (helps the thumbnail)
+# ---------- 4) BANNER IMAGE ----------
 st.image(
     "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop",
     use_container_width=True,
 )
 
-# 4) quick nav (visible on first load -> better thumbnail)
-c1, c2, c3 = st.columns(3)
+# ---------- 5) QUICK NAV (file names matched to your structure) ----------
+c1, c2, c3, c4, c5 = st.columns(5)
+
 with c1:
-    st.page_link("pages/03_Dashboard.py", label="📊 Open Dashboard", use_container_width=True)
+    st.page_link("pages/Dashboard.py", label="📊 Dashboard", use_container_width=True)
 with c2:
-    st.page_link("pages/01_Upload_Data.py", label="📤 Upload Data", use_container_width=True)
+    st.page_link("pages/1_Upload_Data.py", label="📤 Upload Data", use_container_width=True)
 with c3:
-    st.page_link("pages/02_Recommendations.py", label="💡 Recommendations", use_container_width=True)
+    st.page_link("pages/03_Recommendations.py", label="💡 Recommendations", use_container_width=True)
+with c4:
+    st.page_link("pages/_Emission_Factors.py", label="🧮 Emission Factors", use_container_width=True)
+with c5:
+    st.page_link("pages/Reports.py", label="📑 Reports", use_container_width=True)
 
 st.divider()
 
-# 5) KPI cards
+# ---------- 6) KPI CARDS ----------
 k1, k2, k3, k4 = st.columns(4)
 k1.metric("Monthly CO₂e", "12.4 t", "-8%")
 k2.metric("Energy Intensity", "41.2 kWh/m²", "-5%")
 k3.metric("Fleet CO₂e", "3.8 t", "-12%")
 k4.metric("Recycling Rate", "63%", "+7 pts")
 
-# 6) tiny chart (ensures a visual for the capture)
+# ---------- 7) MINI TREND CHART ----------
 df = pd.DataFrame(
-    {"Month": ["May","Jun","Jul","Aug","Sep","Oct"],
-     "CO2e":  [15.1,14.6,14.2,13.5,12.9,12.4]}
+    {"Month": ["May", "Jun", "Jul", "Aug", "Sep", "Oct"],
+     "CO2e":  [15.1, 14.6, 14.2, 13.5, 12.9, 12.4]}
 )
 st.line_chart(df, x="Month", y="CO2e", height=260)
 
-# 7) keep your original CTA if you like (fixed the stray dot)
+# ---------- 8) OPTIONAL CTA ----------
 # if st.button("💡 Open Recommendations", use_container_width=True):
-#     st.switch_page("pages/02_Recommendations.py")
+#     st.switch_page("pages/03_Recommendations.py")
